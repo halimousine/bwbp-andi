@@ -13,12 +13,13 @@ export const LoginImg = styled.Image`
   width: ${win.height};
   height: null;
   aspect-ratio: 1;
+  margin: -50% 0 0% 0%;
 `;
 
 export const LoginHeader = styled.Text`
   font-size: 40px;
   font-family: source-sans-pro-bold;
-  margin: 12.5% 0 5% 10%;
+  margin: -30% 0 5% 10%;
 `;
 
 export const LoginInput = styled.TextInput`
