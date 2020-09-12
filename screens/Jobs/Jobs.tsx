@@ -97,6 +97,16 @@ export class JobsScreen extends React.Component<JobsScreenProps, JobsScreenState
     });
   };
 
+  /**const OverlayExample = () => {
+    const [visible, setVisible] = useState(false);
+    const toggleOverlay = () => {
+      setVisible(!visible);
+    }; 
+    return (
+      <View></View>
+    )
+  */
+
   /**
    * TODO: Write filterJobs function that updates the components' state with jobs that align with the users' weekly schedule.
    */
@@ -106,9 +116,31 @@ export class JobsScreen extends React.Component<JobsScreenProps, JobsScreenState
     console.log(newJobs, availability);
 
     // Step 1: Remove jobs where the schedule doesn't align with the users' availability.
+    const daysavail: string[] = [];
+    for (const [day, imavail] of Object.entries(availability)) {
+      if (imavail == true) {
+        daysavail.push(day);
+      }
+    }
+    const newJobs2: JobRecord[] = [];
+    for (const[OneJob] of Object.entries(newJobs)) {
+      const jobdays: String[] = newJobs[parseInt(OneJob)]["schedule"];
+      let stillavail: Boolean = false; 
+      for (const[OneDay] of Object.entries(jobdays)) {
+        if (daysavail.includes(jobdays[parseInt(OneDay)].toLowerCase())){
+          stillavail = true;
+        } else{
+          stillavail = false;
+          break;
+        }
+      }
+      if (stillavail == true){
+        newJobs2.push(newJobs[parseInt(OneJob)])
+      }
+    }
 
     // Step 2: Save into state
-    this.setState({ jobs: newJobs });
+    this.setState({ jobs: newJobs2 });
   };
 
   getStatus = (jobs: JobRecord[]): Status => {
