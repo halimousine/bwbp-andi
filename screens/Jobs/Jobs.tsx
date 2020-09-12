@@ -107,23 +107,31 @@ export class JobsScreen extends React.Component<JobsScreenProps, JobsScreenState
 
     // Step 1: Remove jobs where the schedule doesn't align with the users' availability.
     const daysavail: string[] = [];
-    for (const [day, avail] of Object.entries(availability)) {
-      if (avail == true) {
+    for (const [day, imavail] of Object.entries(availability)) {
+      if (imavail == true) {
         daysavail.push(day);
       }
     }
-    console.log(daysavail);
     const newJobs2: JobRecord[] = [];
-    for (const[YouHadOneJob] of Object.entries(newJobs)) {
-      console.log("supbruh");
-      console.log(YouHadOneJob);
+    for (const[OneJob] of Object.entries(newJobs)) {
+      const jobdays: String[] = newJobs[parseInt(OneJob)]["schedule"];
+      let stillavail: Boolean = false; 
+      console.log(stillavail);
+      for (const[OneDay] of Object.entries(jobdays)) {
+        if (daysavail.includes(jobdays[parseInt(OneDay)].toLowerCase())){
+          stillavail = true;
+        } else{
+          stillavail = false;
+          break;
+        }
+      }
+      if (stillavail == true){
+        newJobs2.push(newJobs[parseInt(OneJob)])
+      }
     }
-    // for (const [type, desc] of Object.entries(newJobs)) {
-
-    // }
-
+    
     // Step 2: Save into state
-    this.setState({ jobs: newJobs });
+    this.setState({ jobs: newJobs2 });
   };
 
   getStatus = (jobs: JobRecord[]): Status => {
