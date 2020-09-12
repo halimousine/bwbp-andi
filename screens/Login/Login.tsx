@@ -6,15 +6,15 @@ import { getUser } from '@utils/airtable/requests';
 import { UserRecord } from '@utils/airtable/interface';
 import { GlobalContext } from '@components/ContextProvider';
 import { UserMock } from '@utils/airtable/mocks';
-
+ 
 interface LoginScreenState {
   user: UserRecord;
 }
-
+ 
 interface LoginScreenProps {
   navigation: StackNavigationProp;
 }
-
+ 
 /**
  * Uh oh! There's a frontend bug in this code. Help us fix it, please!
  * 1. The image should be above the "Welcome" header.
@@ -26,14 +26,14 @@ interface LoginScreenProps {
  */
 export default class LoginScreen extends React.Component<LoginScreenProps, LoginScreenState> {
   static contextType = GlobalContext;
-
+ 
   constructor(props: LoginScreenProps) {
     super(props);
     this.state = {
       user: { ...UserMock },
     };
   }
-
+ 
   async login(): Promise<void> {
     const user = await getUser(this.state.user);
     if (user && user.password == this.state.user.password) {
@@ -43,11 +43,14 @@ export default class LoginScreen extends React.Component<LoginScreenProps, Login
       alert('Incorrect username or password.');
     }
   }
-
+ 
   render() {
     return (
       <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
         <ScrollView style={{ flex: 1 }}>
+          <ImageContainer>
+            <LoginImg source={require('@assets/imgs/colored_icon.png')} resizeMode="center" />
+          </ImageContainer>
           <LoginHeader>Welcome</LoginHeader>
           <LoginText>Username</LoginText>
           <LoginInput
@@ -62,9 +65,6 @@ export default class LoginScreen extends React.Component<LoginScreenProps, Login
             }
             value={this.state.user.uname}
           />
-          <ImageContainer>
-            <LoginImg source={require('@assets/imgs/colored_icon.png')} resizeMode="center" />
-          </ImageContainer>
           <LoginText>Password</LoginText>
           <LoginInput
             secureTextEntry
@@ -75,7 +75,7 @@ export default class LoginScreen extends React.Component<LoginScreenProps, Login
             }
             value={this.state.user.password}
           />
-
+ 
           <LoginButton onPress={(): Promise<void> => this.login()}>
             <LoginButtonText>Log In</LoginButtonText>
           </LoginButton>
@@ -83,4 +83,4 @@ export default class LoginScreen extends React.Component<LoginScreenProps, Login
       </KeyboardAvoidingView>
     );
   }
-}
+};

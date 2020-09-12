@@ -10,7 +10,7 @@ export const ImageContainer = styled.View`
 `;
 
 export const LoginImg = styled.Image`
-  width: ${win.height};
+  width: ${win.height*.5};
   height: null;
   aspect-ratio: 1;
 `;

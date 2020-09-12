@@ -114,14 +114,10 @@ export class JobsScreen extends React.Component<JobsScreenProps, JobsScreenState
     }
     console.log(daysavail);
     const newJobs2: JobRecord[] = [];
-    //for (const[YouHadOneJob] of Object.entries(newJobs)) {
-    //  for (const[title, desc] of Object.entries(YouHadOneJob)) {
-    //    if (desc.includes(daysavail)) {
-    //      newJobs2.push(YouHadOneJob); 
-    //      }
-    //    }
-    //  } 
-    //}
+    for (const[YouHadOneJob] of Object.entries(newJobs)) {
+      console.log("supbruh");
+      console.log(YouHadOneJob);
+    }
     // for (const [type, desc] of Object.entries(newJobs)) {
 
     // }
