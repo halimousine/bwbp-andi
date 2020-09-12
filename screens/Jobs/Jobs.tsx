@@ -97,6 +97,16 @@ export class JobsScreen extends React.Component<JobsScreenProps, JobsScreenState
     });
   };
 
+  /**const OverlayExample = () => {
+    const [visible, setVisible] = useState(false);
+    const toggleOverlay = () => {
+      setVisible(!visible);
+    }; 
+    return (
+      <View></View>
+    )
+  */
+
   /**
    * TODO: Write filterJobs function that updates the components' state with jobs that align with the users' weekly schedule.
    */
@@ -116,7 +126,6 @@ export class JobsScreen extends React.Component<JobsScreenProps, JobsScreenState
     for (const[OneJob] of Object.entries(newJobs)) {
       const jobdays: String[] = newJobs[parseInt(OneJob)]["schedule"];
       let stillavail: Boolean = false; 
-      console.log(stillavail);
       for (const[OneDay] of Object.entries(jobdays)) {
         if (daysavail.includes(jobdays[parseInt(OneDay)].toLowerCase())){
           stillavail = true;
@@ -129,7 +138,7 @@ export class JobsScreen extends React.Component<JobsScreenProps, JobsScreenState
         newJobs2.push(newJobs[parseInt(OneJob)])
       }
     }
-    
+
     // Step 2: Save into state
     this.setState({ jobs: newJobs2 });
   };
